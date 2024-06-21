@@ -61,8 +61,6 @@ class Version
             $version .= "+{$this->build}";
         }
 
-        $this->parseVersion();
-
         return $version;
     }
     /**
