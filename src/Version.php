@@ -11,7 +11,7 @@ class Version
     public string|null $preRelease;
     public string|null $build;
     public string $pattern = '/^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
-    protected string $fallbackVersion = 'v0.0.0';
+    protected string $fallbackVersion = '0.0.0';
 
 
     public function __construct(string $version)
@@ -51,7 +51,7 @@ class Version
      */
     public function getVersion(): string
     {
-        $version = "v{$this->major}.{$this->minor}.{$this->patch}";
+        $version = "{$this->major}.{$this->minor}.{$this->patch}";
 
         if (!empty($this->preRelease)) {
             $version .= "-{$this->preRelease}";
