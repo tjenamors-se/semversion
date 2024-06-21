@@ -1,0 +1,30 @@
+{
+  "name": "tjenamors-se/semversion",
+  "description": "Handle your semantic versioning with ease",
+  "type": "library",
+  "license": "MIT",
+  "version": "1.0.0",
+  "autoload": {
+    "psr-4": {
+      "Tjenamors\\Semversion\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Magnus Åberg",
+      "email": "himself@magnusaberg.me"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^8.3"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.59",
+    "phpstan/phpstan": "^1.11"
+  },
+  "scripts": {
+    "fix": "vendor/bin/php-cs-fixer fix ./src --show-progress=bar",
+    "analyze": "vendor/bin/phpstan analyse -l 9 src"
+  }
+}
