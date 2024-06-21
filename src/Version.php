@@ -65,4 +65,74 @@ class Version
 
         return $version;
     }
+    /**
+     * @return string
+     */
+    public function bumpMajor(): string
+    {
+        $this->major++;
+        $this->minor = 0;
+        $this->patch = 0;
+        $this->preRelease = null;
+        $this->build = null;
+        return $this->getVersion();
+    }
+    /**
+     * @return string
+     */
+    public function bumpMinor(): string
+    {
+        $this->minor++;
+        $this->patch = 0;
+        $this->preRelease = null;
+        $this->build = null;
+        return $this->getVersion();
+    }
+    /**
+     * @return string
+     */
+    public function bumpPatch(): string
+    {
+        $this->patch++;
+        $this->preRelease = null;
+        $this->build = null;
+        return $this->getVersion();
+    }
+    /**
+     * @return string
+     */
+    public function bumpPreRelease(): string
+    {
+        if ($this->preRelease === null) {
+            $this->preRelease = PreReleaseType::ALPHA->value;
+        } else {
+            $parts = explode('.', $this->preRelease);
+            $lastPart = array_pop($parts);
+
+            if (is_numeric($lastPart)) {
+                $lastPart++;
+            } else {
+                if (preg_match('/(\d+)$/', $lastPart, $matches)) {
+                    $number = (int)$matches[1] + 1;
+                    $lastPart = preg_replace('/\d+$/', "{$number}", $lastPart);
+                } else {
+                    $lastPart .= '.1';
+                }
+            }
+
+            $parts[] = $lastPart;
+            $this->preRelease = implode('.', $parts);
+        }
+
+        return $this->getVersion();
+    }
+    /**
+     * @param string $build
+     * @return string
+     */
+    public function setBuild(string $build): string
+    {
+        $this->build = $build;
+        return $this->getVersion();
+    }
 }
